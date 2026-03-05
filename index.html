@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="meta.title">无极剪纸 - 传统艺术国际展示</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="main.css">
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        :root {
+            --primary-color: #c62828;
+            --secondary-color: #f9a825;
+            --dark-color: #333;
+            --light-color: #f5f5f5;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            background-color: #f9f5f0;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* 导航栏样式 */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 25px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding-bottom: 5px;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* 英雄区域样式 */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        /* 替换为你的背景图片路径 */ 
+                        url('flower.jpg') center/cover no-repeat;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #a51c1c;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 模块通用样式 */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            margin: 10px auto;
+        }
+        
+        /* 首页作品展示 */
+        .featured-works {
+            background-color: white;
+        }
+        
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .work-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .work-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .work-img {
+            height: 250px;
+            width: 100%;
+            /* 替换为你的剪纸作品图片路径 */
+            background: #f0f0f0 url('portrait.jpg') center/cover no-repeat;
+        }
+        
+        .work-img-2 {
+            /* 替换为你的剪纸作品图片路径 */
+            background: #f0f0f0 url('rounds.jpg') center/cover no-repeat;
+        }
+        
+        .work-img-3 {
+            /* 替换为你的剪纸作品图片路径 */
+            background: #f0f0f0 url('flower_bird.jpg') center/cover no-repeat;
+        }
+        
+        .work-info {
+            padding: 20px;
+        }
+        
+        .work-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        
+        /* Learn模块样式 */
+        .learn-module {
+            background-color: var(--light-color);
+        }
+        
+        .language-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .language-tab {
+            padding: 10px 20px;
+            background-color: white;
+            margin: 0 10px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .language-tab.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .language-tab:hover:not(.active) {
+            border-color: var(--primary-color);
+        }
+        
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .video-placeholder {
+            width: 100%;
+            height: 400px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            /* 替换为你的教学视频路径 */
+            background: url('title.png') center/cover no-repeat; 
+        }
+        
+        .video-placeholder i {
+            font-size: 4rem;
+            color: var(--primary-color);
+        }
+        
+        /* Create模块样式 */
+        .create-module {
+            background-color: white;
+        }
+        
+        .create-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .create-card {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .create-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .create-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        /* Shop模块样式 */
+        .shop-module {
+            background-color: var(--light-color);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-img {
+            height: 200px;
+            width: 100%;
+            /* 替换为你的产品图片路径 */
+            background: #f0f0f0 url('1.jpg') center/cover no-repeat;
+        }
+        
+        .product-img-2 {
+            /* 替换为你的产品图片路径 */
+            background: #f0f0f0 url('2.jpeg') center/cover no-repeat;
+        }
+        
+        .product-img-3 {
+            /* 替换为你的产品图片路径 */
+            background: #f0f0f0 url('3.jpg') center/cover no-repeat;
+        }
+
+        .product-img-4 {
+            /* 替换为你的产品图片路径 */
+            background: #f0f0f0 url('4.jpg') center/cover no-repeat;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+        }
+        
+        .price {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+        
+        /* Map模块样式 */
+        .map-module {
+            background-color: white;
+        }
+        
+        .map-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .map-placeholder {
+            width: 100%;
+            height: 400px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            /* 替换为你的地图图片路径 */
+             background: url('map.jpg') center/cover no-repeat; 
+        }
+        
+        .map-placeholder i {
+            font-size: 4rem;
+            color: var(--primary-color);
+        }
+        
+        .region-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .region-card {
+            background-color: var(--light-color);
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                box-shadow: var(--shadow);
+                padding: 20px 0;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-cut logo-icon"></i>
+                    <h1 data-i18n="brand.name">无极剪纸</h1>
+                </div>
+                <div class="nav-right">
+                    <ul class="nav-links">
+                        <li><a href="#home" class="active" data-i18n="nav.home">首页</a></li>
+                        <li><a href="#learn" data-i18n="nav.learn">学习</a></li>
+                        <li><a href="#create" data-i18n="nav.create">创作</a></li>
+                        <li><a href="#shop" data-i18n="nav.shop">商城</a></li>
+                        <li><a href="#map" data-i18n="nav.map">文化地图</a></li>
+                    </ul>
+                    <div class="language-tabs nav-language-tabs">
+                        <button type="button" class="language-tab active" data-lang="zh-CN">中文</button>
+                        <button type="button" class="language-tab" data-lang="en">English</button>
+                        <button type="button" class="language-tab" data-lang="es">Español</button>
+                        <button type="button" class="language-tab" data-lang="fr">Français</button>
+                    </div>
+                    <div class="mobile-menu">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 首页英雄区域 -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h2 data-i18n="hero.title">无极剪纸 · 纸上艺术</h2>
+                <p data-i18n="hero.subtitle">探索中国千年剪纸文化的魅力，体验传统与现代的完美融合</p>
+                <a href="#learn" class="btn" data-i18n="hero.cta">开始探索</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 首页作品展示 -->
+    <section class="section featured-works">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="works.title">精选作品</h2>
+                <p data-i18n="works.subtitle">欣赏传统剪纸艺术的精湛技艺与文化内涵</p>
+            </div>
+            <div class="works-grid">
+                <div class="work-card">
+                    <div class="work-img"></div>
+                    <div class="work-info">
+                        <h3 data-i18n="works.item1.title">人物肖像</h3>
+                        <p data-i18n="works.item1.desc">通过细腻的裁剪，准确表现面部特征与神态。</p>
+                    </div>
+                </div>
+                <div class="work-card">
+                    <div class="work-img work-img-2"></div>
+                    <div class="work-info">
+                        <h3 data-i18n="works.item2.title">窗花剪纸</h3>
+                        <p data-i18n="works.item2.desc">以花鸟、建筑等图案为载体，红纸传情，传承民间艺术之美。</p>
+                    </div>
+                </div>
+                <div class="work-card">
+                    <div class="work-img work-img-3"></div>
+                    <div class="work-info">
+                        <h3 data-i18n="works.item3.title">花鸟图案</h3>
+                        <p data-i18n="works.item3.desc">自然元素与传统纹样的完美结合，展现生命之美。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learn模块 -->
+    <section class="section learn-module" id="learn">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="learn.title">学习剪纸</h2>
+                <p data-i18n="learn.subtitle">通过多语言教学资源，轻松掌握剪纸技艺</p>
+            </div>
+            <div class="video-container">
+                <div class="video-placeholder">
+                    <i class="fas fa-play-circle"></i>
+                    <!-- 替换为你的教学视频路径 -->
+                    <!-- <video controls width="100%">
+                        <source src="videos/paper-cutting-tutorial.mp4" type="video/mp4">
+                        您的浏览器不支持视频播放。
+                    </video> -->
+                </div>
+                <h3 data-i18n="learn.video.title">剪纸基础技法教学</h3>
+                <p data-i18n="learn.video.desc">本视频将介绍剪纸的基本工具、纸张选择和基础剪法，适合初学者入门学习。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Create模块 -->
+    <section class="section create-module" id="create">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="create.title">创意工坊</h2>
+                <p data-i18n="create.subtitle">发挥您的创造力，设计独一无二的剪纸作品</p>
+            </div>
+            <div class="create-grid">
+                <div class="create-card">
+                    <i class="fas fa-upload create-icon"></i>
+                    <h3 data-i18n="create.card1.title">上传作品</h3>
+                    <p data-i18n="create.card1.desc">分享您的剪纸创作，与其他爱好者交流心得。</p>
+                    <a href="#" class="btn" style="margin-top: 15px;" data-i18n="create.card1.cta">上传</a>
+                </div>
+                <div class="create-card">
+                    <i class="fas fa-magic create-icon"></i>
+                    <h3 data-i18n="create.card2.title">AI图案生成</h3>
+                    <p data-i18n="create.card2.desc">利用AI技术为您生成个性化的剪纸图案设计。</p>
+                    <a href="#" class="btn" style="margin-top: 15px;" data-i18n="create.card2.cta">尝试</a>
+                </div>
+                <div class="create-card">
+                    <i class="fas fa-layer-group create-icon"></i>
+                    <h3 data-i18n="create.card3.title">分层剪纸工具</h3>
+                    <p data-i18n="create.card3.desc">将复杂图案分解为多个层次，便于逐步完成。</p>
+                    <a href="#" class="btn" style="margin-top: 15px;" data-i18n="create.card3.cta">使用</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop模块 -->
+    <section class="section shop-module" id="shop">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="shop.title">剪纸商城</h2>
+                <p data-i18n="shop.subtitle">购买优质剪纸工具与文创产品</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-img"></div>
+                    <div class="product-info">
+                        <h3 data-i18n="shop.item1.title">剪纸工具包初级套装礼盒</h3>
+                        <p data-i18n="shop.item1.desc">包含剪纸专用纸、剪刀、刻刀和基础图案模板。</p>
+                        <div class="price">¥36.00</div>
+                        <a href="#" class="btn" data-i18n="shop.buy">购买</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img product-img-2"></div>
+                    <div class="product-info">
+                        <h3 data-i18n="shop.item2.title">主题节日版套装礼盒</h3>
+                        <p data-i18n="shop.item2.desc">结合春节、圣诞节等节庆主题，包装设计更精美，内含节日专属图案及故事卡，满足礼品赠送和家庭活动需求。</p>
+                        <div class="price">¥55.00</div>
+                        <a href="#" class="btn" data-i18n="shop.buy">购买</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img product-img-3"></div>
+                    <div class="product-info">
+                        <h3 data-i18n="shop.item3.title">标准版中国神话主题套装礼盒</h3>
+                        <p data-i18n="shop.item3.desc">项目首波主打产品，包含中国神话经典故事场景及人物剪纸。性价比极高。</p>
+                        <div class="price">¥45.00</div>
+                        <a href="#" class="btn" data-i18n="shop.buy">购买</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-img product-img-4"></div>
+                    <div class="product-info">
+                        <h3 data-i18n="shop.item4.title">收藏版中国神话主题套装礼盒</h3>
+                        <p data-i18n="shop.item4.desc">收藏版与知名剪纸艺术家联名，限量发售，具备稀缺性和艺术收藏价值。礼盒采用双层镂空设计，包装更精美。目标用户为艺术品收藏家、文化机构及高净值文化爱好者。</p>
+                        <div class="price">¥120.00</div>
+                        <a href="#" class="btn" data-i18n="shop.buy">购买</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map模块 -->
+    <section class="section map-module" id="map">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="map.title">文化地图</h2>
+                <p data-i18n="map.subtitle">探索剪纸艺术在中国的起源与发展</p>
+            </div>
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <!-- 替换为你的地图图片路径 -->
+                    <!-- <img src="images/china-map.jpg" alt="中国剪纸文化地图" style="width:100%;height:100%;object-fit:cover;"> -->
+                </div>
+                <h3 data-i18n="map.section.title">中国剪纸文化分布</h3>
+                <p data-i18n="map.section.desc">剪纸艺术在中国各地有不同的风格和特色，反映了各地的文化传统和审美趣味。</p>
+                
+                <div class="region-info">
+                    <div class="region-card">
+                        <h4 data-i18n="map.region1.title">河北无极</h4>
+                        <p data-i18n="map.region1.desc">无极剪纸以精细、构图饱满著称，多为吉祥图案。</p>
+                    </div>
+                    <div class="region-card">
+                        <h4 data-i18n="map.region2.title">陕西延安</h4>
+                        <p data-i18n="map.region2.desc">延安剪纸风格粗犷豪放，多表现民俗生活和民间故事。</p>
+                    </div>
+                    <div class="region-card">
+                        <h4 data-i18n="map.region3.title">山西广灵</h4>
+                        <p data-i18n="map.region3.desc">广灵剪纸色彩鲜艳，刀工精细，具有浓郁的地方特色。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 data-i18n="footer.brand">无极剪纸</h3>
+                    <p data-i18n="footer.mission">致力于推广中国剪纸文化，让传统艺术走向世界。</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 data-i18n="footer.links">快速链接</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home" data-i18n="nav.home">首页</a></li>
+                        <li><a href="#learn" data-i18n="footer.learnResources">学习资源</a></li>
+                        <li><a href="#create" data-i18n="footer.createWorkshop">创作工坊</a></li>
+                        <li><a href="#shop" data-i18n="footer.productShop">产品商城</a></li>
+                        <li><a href="#map" data-i18n="nav.map">文化地图</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 data-i18n="footer.contact">联系我们</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> <span data-i18n="footer.address">河北省石家庄市无极县</span></li>
+                        <li><i class="fas fa-phone"></i> <span data-i18n="footer.phone">+86 123 4567 8900</span></li>
+                        <li><i class="fas fa-envelope"></i> <span data-i18n="footer.email">info@wuji-papercut.com</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p data-i18n="footer.copyright">&copy; 2023 无极剪纸国际展示网站 - 保留所有权利</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 移动端菜单切换
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileMenu.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+            
+            const translations = {
+                "zh-CN": {
+                    "meta.title": "无极剪纸 - 传统艺术国际展示",
+                    "brand.name": "无极剪纸",
+                    "nav.home": "首页",
+                    "nav.learn": "学习",
+                    "nav.create": "创作",
+                    "nav.shop": "商城",
+                    "nav.map": "文化地图",
+                    "hero.title": "无极剪纸 · 纸上艺术",
+                    "hero.subtitle": "探索中国千年剪纸文化的魅力，体验传统与现代的完美融合",
+                    "hero.cta": "开始探索",
+                    "works.title": "精选作品",
+                    "works.subtitle": "欣赏传统剪纸艺术的精湛技艺与文化内涵",
+                "works.item1.title": "人物肖像",
+                "works.item1.desc": "通过细腻的裁剪，准确表现面部特征与神态。",
+                "works.item2.title": "窗花剪纸",
+                "works.item2.desc": "以花鸟、建筑等图案为载体，红纸传情，传承民间艺术之美。",
+                    "works.item3.title": "花鸟图案",
+                    "works.item3.desc": "自然元素与传统纹样的完美结合，展现生命之美。",
+                    "learn.title": "学习剪纸",
+                    "learn.subtitle": "通过多语言教学资源，轻松掌握剪纸技艺",
+                    "learn.video.title": "剪纸基础技法教学",
+                    "learn.video.desc": "本视频将介绍剪纸的基本工具、纸张选择和基础剪法，适合初学者入门学习。",
+                    "create.title": "创意工坊",
+                    "create.subtitle": "发挥您的创造力，设计独一无二的剪纸作品",
+                    "create.card1.title": "上传作品",
+                    "create.card1.desc": "分享您的剪纸创作，与其他爱好者交流心得。",
+                    "create.card1.cta": "上传",
+                    "create.card2.title": "AI图案生成",
+                    "create.card2.desc": "利用AI技术为您生成个性化的剪纸图案设计。",
+                    "create.card2.cta": "尝试",
+                    "create.card3.title": "分层剪纸工具",
+                    "create.card3.desc": "将复杂图案分解为多个层次，便于逐步完成。",
+                    "create.card3.cta": "使用",
+                    "shop.title": "剪纸商城",
+                    "shop.subtitle": "购买优质剪纸工具与文创产品",
+                    "shop.item1.title": "剪纸工具包初级套装礼盒",
+                    "shop.item1.desc": "包含剪纸专用纸、剪刀、刻刀和基础图案模板。",
+                    "shop.item2.title": "主题节日版套装礼盒",
+                    "shop.item2.desc": "结合春节、圣诞节等节庆主题，包装设计更精美，内含节日专属图案及故事卡，满足礼品赠送和家庭活动需求。",
+                    "shop.item3.title": "标准版中国神话主题套装礼盒",
+                    "shop.item3.desc": "项目首波主打产品，包含中国神话经典故事场景及人物剪纸。性价比极高。",
+                    "shop.item4.title": "收藏版中国神话主题套装礼盒",
+                    "shop.item4.desc": "收藏版与知名剪纸艺术家联名，限量发售，具备稀缺性和艺术收藏价值。礼盒采用双层镂空设计，包装更精美。目标用户为艺术品收藏家、文化机构及高净值文化爱好者。",
+                    "shop.buy": "购买",
+                    "map.title": "文化地图",
+                    "map.subtitle": "探索剪纸艺术在中国的起源与发展",
+                    "map.section.title": "中国剪纸文化分布",
+                    "map.section.desc": "剪纸艺术在中国各地有不同的风格和特色，反映了各地的文化传统和审美趣味。",
+                    "map.region1.title": "河北无极",
+                    "map.region1.desc": "无极剪纸以精细、构图饱满著称，多为吉祥图案。",
+                    "map.region2.title": "陕西延安",
+                    "map.region2.desc": "延安剪纸风格粗犷豪放，多表现民俗生活和民间故事。",
+                    "map.region3.title": "山西广灵",
+                    "map.region3.desc": "广灵剪纸色彩鲜艳，刀工精细，具有浓郁的地方特色。",
+                    "footer.brand": "无极剪纸",
+                    "footer.mission": "致力于推广中国剪纸文化，让传统艺术走向世界。",
+                    "footer.links": "快速链接",
+                    "footer.learnResources": "学习资源",
+                    "footer.createWorkshop": "创作工坊",
+                    "footer.productShop": "产品商城",
+                    "footer.contact": "联系我们",
+                    "footer.address": "河北省石家庄市无极县",
+                    "footer.phone": "+86 123 4567 8900",
+                    "footer.email": "info@wuji-papercut.com",
+                    "footer.copyright": "© 2023 无极剪纸国际展示网站 - 保留所有权利"
+                },
+                "en": {
+                    "meta.title": "Wuji Paper Cutting - Traditional Art Showcase",
+                    "brand.name": "Wuji Paper Cutting",
+                    "nav.home": "Home",
+                    "nav.learn": "Learn",
+                    "nav.create": "Create",
+                    "nav.shop": "Shop",
+                    "nav.map": "Cultural Map",
+                    "hero.title": "Wuji Paper Cutting · Art on Paper",
+                    "hero.subtitle": "Explore the charm of Chinese paper-cutting and the fusion of tradition and modernity",
+                    "hero.cta": "Start Exploring",
+                    "works.title": "Featured Works",
+                    "works.subtitle": "Appreciate the craftsmanship and cultural meaning of paper cutting",
+                "works.item1.title": "Portrait",
+                "works.item1.desc": "Delicate cutting captures facial features and expressions with precision.",
+                "works.item2.title": "Window Flower Paper Cutting",
+                "works.item2.desc": "Featuring motifs like flowers, birds, and architecture, red paper conveys warmth and preserves folk art beauty.",
+                    "works.item3.title": "Flowers & Birds",
+                    "works.item3.desc": "A blend of nature and traditional patterns, celebrating the beauty of life.",
+                    "learn.title": "Learn Paper Cutting",
+                    "learn.subtitle": "Master paper cutting with multilingual learning resources",
+                    "learn.video.title": "Basic Paper-Cutting Techniques",
+                    "learn.video.desc": "Learn tools, paper selection, and foundational cutting methods—perfect for beginners.",
+                    "create.title": "Creative Workshop",
+                    "create.subtitle": "Unleash your creativity and design unique paper-cut works",
+                    "create.card1.title": "Upload Your Work",
+                    "create.card1.desc": "Share your creations and exchange ideas with other enthusiasts.",
+                    "create.card1.cta": "Upload",
+                    "create.card2.title": "AI Pattern Generator",
+                    "create.card2.desc": "Generate personalized paper-cut patterns with AI assistance.",
+                    "create.card2.cta": "Try It",
+                    "create.card3.title": "Layered Cutting Tool",
+                    "create.card3.desc": "Break complex patterns into layers for step-by-step completion.",
+                    "create.card3.cta": "Use Now",
+                    "shop.title": "Paper-Cut Shop",
+                    "shop.subtitle": "Buy quality tools and cultural creative products",
+                    "shop.item1.title": "Beginner Tool Gift Set",
+                    "shop.item1.desc": "Includes paper, scissors, craft knife, and basic pattern templates.",
+                    "shop.item2.title": "Festival Edition Gift Set",
+                    "shop.item2.desc": "Designed around festivals like Spring Festival and Christmas, with premium packaging, exclusive patterns, and story cards—ideal for gifts and family activities.",
+                    "shop.item3.title": "Mythology Standard Gift Set",
+                    "shop.item3.desc": "A flagship first-release set featuring classic Chinese mythology scenes and characters—excellent value.",
+                    "shop.item4.title": "Mythology Collector’s Gift Set",
+                    "shop.item4.desc": "A limited co-branded collector’s edition with a renowned paper-cut artist, featuring a double-layer hollow design and refined packaging—crafted for collectors, cultural institutions, and high-end enthusiasts.",
+                    "shop.buy": "Buy",
+                    "map.title": "Cultural Map",
+                    "map.subtitle": "Explore the origins and development of paper cutting in China",
+                    "map.section.title": "Paper-Cutting in China",
+                    "map.section.desc": "Different regions have distinct styles, reflecting local traditions and aesthetics.",
+                    "map.region1.title": "Wuji, Hebei",
+                    "map.region1.desc": "Known for fine details and full compositions, often featuring auspicious motifs.",
+                    "map.region2.title": "Yan'an, Shaanxi",
+                    "map.region2.desc": "Bold and expressive, depicting folk life and stories.",
+                    "map.region3.title": "Guangling, Shanxi",
+                    "map.region3.desc": "Vivid colors and delicate knife work with strong local character.",
+                    "footer.brand": "Wuji Paper Cutting",
+                    "footer.mission": "Promoting Chinese paper-cut culture and bringing traditional art to the world.",
+                    "footer.links": "Quick Links",
+                    "footer.learnResources": "Learning Resources",
+                    "footer.createWorkshop": "Creative Workshop",
+                    "footer.productShop": "Shop",
+                    "footer.contact": "Contact",
+                    "footer.address": "Wuji County, Shijiazhuang, Hebei, China",
+                    "footer.phone": "+86 123 4567 8900",
+                    "footer.email": "info@wuji-papercut.com",
+                    "footer.copyright": "© 2023 Wuji Paper Cutting - All rights reserved"
+                },
+                "es": {
+                    "meta.title": "Recorte de Papel de Wuji - Exposición de Arte Tradicional",
+                    "brand.name": "Recorte de Papel de Wuji",
+                    "nav.home": "Inicio",
+                    "nav.learn": "Aprender",
+                    "nav.create": "Crear",
+                    "nav.shop": "Tienda",
+                    "nav.map": "Mapa Cultural",
+                    "hero.title": "Wuji · Arte en Papel",
+                    "hero.subtitle": "Explora el encanto del recorte de papel chino y la fusión entre tradición y modernidad",
+                    "hero.cta": "Empezar",
+                    "works.title": "Obras Destacadas",
+                    "works.subtitle": "Admira la artesanía y el significado cultural del recorte de papel",
+                "works.item1.title": "Retrato",
+                "works.item1.desc": "El corte delicado representa con precisión los rasgos faciales y la expresión.",
+                "works.item2.title": "Recorte de Ventana",
+                "works.item2.desc": "Con motivos como flores, aves y arquitectura, el papel rojo transmite emoción y preserva la belleza del arte popular.",
+                    "works.item3.title": "Flores y Aves",
+                    "works.item3.desc": "Una combinación de naturaleza y patrones tradicionales que celebra la belleza de la vida.",
+                    "learn.title": "Aprender Recorte de Papel",
+                    "learn.subtitle": "Domina la técnica con recursos de aprendizaje multilingües",
+                    "learn.video.title": "Técnicas Básicas",
+                    "learn.video.desc": "Herramientas, selección de papel y métodos de corte fundamentales—ideal para principiantes.",
+                    "create.title": "Taller Creativo",
+                    "create.subtitle": "Desata tu creatividad y diseña obras únicas",
+                    "create.card1.title": "Subir Obra",
+                    "create.card1.desc": "Comparte tus creaciones e intercambia ideas con otros aficionados.",
+                    "create.card1.cta": "Subir",
+                    "create.card2.title": "Generador de Patrones IA",
+                    "create.card2.desc": "Genera patrones personalizados con ayuda de IA.",
+                    "create.card2.cta": "Probar",
+                    "create.card3.title": "Herramienta por Capas",
+                    "create.card3.desc": "Divide patrones complejos en capas para completar paso a paso.",
+                    "create.card3.cta": "Usar",
+                    "shop.title": "Tienda de Recorte",
+                    "shop.subtitle": "Compra herramientas de calidad y productos creativos",
+                    "shop.item1.title": "Caja Regalo de Inicio",
+                    "shop.item1.desc": "Incluye papel, tijeras, cúter y plantillas básicas.",
+                    "shop.item2.title": "Caja Edición Festiva",
+                    "shop.item2.desc": "Temática de festividades como el Año Nuevo chino y Navidad, con empaque más fino, patrones exclusivos y tarjetas de historias—ideal para regalos y actividades familiares.",
+                    "shop.item3.title": "Caja Mitología (Estándar)",
+                    "shop.item3.desc": "Set principal del primer lanzamiento con escenas y personajes clásicos de la mitología china—gran relación calidad-precio.",
+                    "shop.item4.title": "Caja Mitología (Colección)",
+                    "shop.item4.desc": "Edición de colección limitada en colaboración con un reconocido artista, con diseño calado de doble capa y empaque más refinado—para coleccionistas, instituciones culturales y aficionados de alto nivel.",
+                    "shop.buy": "Comprar",
+                    "map.title": "Mapa Cultural",
+                    "map.subtitle": "Explora el origen y el desarrollo del recorte de papel en China",
+                    "map.section.title": "Distribución Cultural",
+                    "map.section.desc": "Cada región tiene estilos distintos que reflejan tradiciones y estética locales.",
+                    "map.region1.title": "Wuji, Hebei",
+                    "map.region1.desc": "Famoso por sus detalles finos y composiciones completas, con motivos auspiciosos.",
+                    "map.region2.title": "Yan'an, Shaanxi",
+                    "map.region2.desc": "Estilo audaz y expresivo, con vida y relatos populares.",
+                    "map.region3.title": "Guangling, Shanxi",
+                    "map.region3.desc": "Colores vivos y trabajo delicado con fuerte carácter local.",
+                    "footer.brand": "Recorte de Papel de Wuji",
+                    "footer.mission": "Promoviendo la cultura del recorte de papel chino y llevando el arte tradicional al mundo.",
+                    "footer.links": "Enlaces Rápidos",
+                    "footer.learnResources": "Recursos de Aprendizaje",
+                    "footer.createWorkshop": "Taller Creativo",
+                    "footer.productShop": "Tienda",
+                    "footer.contact": "Contacto",
+                    "footer.address": "Condado de Wuji, Shijiazhuang, Hebei, China",
+                    "footer.phone": "+86 123 4567 8900",
+                    "footer.email": "info@wuji-papercut.com",
+                    "footer.copyright": "© 2023 Recorte de Papel de Wuji - Todos los derechos reservados"
+                },
+                "fr": {
+                    "meta.title": "Découpage de Papier de Wuji - Vitrine d’Art Traditionnel",
+                    "brand.name": "Découpage de Papier de Wuji",
+                    "nav.home": "Accueil",
+                    "nav.learn": "Apprendre",
+                    "nav.create": "Créer",
+                    "nav.shop": "Boutique",
+                    "nav.map": "Carte Culturelle",
+                    "hero.title": "Wuji · L’art sur papier",
+                    "hero.subtitle": "Découvrez le charme du découpage de papier chinois et l’alliance du traditionnel et du moderne",
+                    "hero.cta": "Commencer",
+                    "works.title": "Œuvres Sélectionnées",
+                    "works.subtitle": "Appréciez le savoir-faire et la richesse culturelle du découpage de papier",
+                "works.item1.title": "Portrait",
+                "works.item1.desc": "Une découpe délicate restitue avec précision les traits du visage et l’expression.",
+                "works.item2.title": "Découpage de Fenêtre",
+                "works.item2.desc": "Avec des motifs de fleurs, d’oiseaux ou d’architecture, le papier rouge transmet l’émotion et perpétue la beauté de l’art populaire.",
+                    "works.item3.title": "Fleurs & Oiseaux",
+                    "works.item3.desc": "Un mariage entre nature et motifs traditionnels, célébrant la beauté de la vie.",
+                    "learn.title": "Apprendre le Papier Découpé",
+                    "learn.subtitle": "Maîtrisez la technique grâce à des ressources multilingues",
+                    "learn.video.title": "Techniques de Base",
+                    "learn.video.desc": "Outils, choix du papier et méthodes de découpe fondamentales—idéal pour débutants.",
+                    "create.title": "Atelier Créatif",
+                    "create.subtitle": "Libérez votre créativité et concevez des œuvres uniques",
+                    "create.card1.title": "Téléverser une Œuvre",
+                    "create.card1.desc": "Partagez vos créations et échangez avec d’autres passionnés.",
+                    "create.card1.cta": "Téléverser",
+                    "create.card2.title": "Générateur de Motifs IA",
+                    "create.card2.desc": "Générez des motifs personnalisés avec l’aide de l’IA.",
+                    "create.card2.cta": "Essayer",
+                    "create.card3.title": "Outil de Découpe en Couches",
+                    "create.card3.desc": "Décomposez les motifs complexes en couches pour avancer étape par étape.",
+                    "create.card3.cta": "Utiliser",
+                    "shop.title": "Boutique",
+                    "shop.subtitle": "Achetez des outils de qualité et des produits créatifs",
+                    "shop.item1.title": "Coffret Débutant",
+                    "shop.item1.desc": "Comprend papier, ciseaux, cutter et gabarits de base.",
+                    "shop.item2.title": "Coffret Édition Fêtes",
+                    "shop.item2.desc": "Inspiré par des fêtes comme le Nouvel An chinois et Noël, avec un packaging plus soigné, des motifs exclusifs et des cartes-histoires—idéal pour offrir et les activités en famille.",
+                    "shop.item3.title": "Coffret Mythologie (Standard)",
+                    "shop.item3.desc": "Produit phare du premier lancement, avec des scènes et personnages classiques de la mythologie chinoise—excellent rapport qualité-prix.",
+                    "shop.item4.title": "Coffret Mythologie (Collection)",
+                    "shop.item4.desc": "Édition de collection limitée en collaboration avec un artiste reconnu, avec un design ajouré double couche et un packaging plus raffiné—pour collectionneurs, institutions culturelles et passionnés haut de gamme.",
+                    "shop.buy": "Acheter",
+                    "map.title": "Carte Culturelle",
+                    "map.subtitle": "Explorez l’origine et le développement du papier découpé en Chine",
+                    "map.section.title": "Répartition Culturelle",
+                    "map.section.desc": "Chaque région possède un style distinct reflétant traditions et esthétique locales.",
+                    "map.region1.title": "Wuji, Hebei",
+                    "map.region1.desc": "Réputé pour ses détails fins et ses compositions riches, souvent avec des motifs porte-bonheur.",
+                    "map.region2.title": "Yan’an, Shaanxi",
+                    "map.region2.desc": "Style audacieux et expressif, illustrant la vie et les récits populaires.",
+                    "map.region3.title": "Guangling, Shanxi",
+                    "map.region3.desc": "Couleurs vives et découpe délicate avec une forte identité locale.",
+                    "footer.brand": "Découpage de Papier de Wuji",
+                    "footer.mission": "Promouvoir la culture du papier découpé chinois et faire rayonner l’art traditionnel dans le monde.",
+                    "footer.links": "Liens Rapides",
+                    "footer.learnResources": "Ressources d’Apprentissage",
+                    "footer.createWorkshop": "Atelier Créatif",
+                    "footer.productShop": "Boutique",
+                    "footer.contact": "Contact",
+                    "footer.address": "Comté de Wuji, Shijiazhuang, Hebei, Chine",
+                    "footer.phone": "+86 123 4567 8900",
+                    "footer.email": "info@wuji-papercut.com",
+                    "footer.copyright": "© 2023 Découpage de Papier de Wuji - Tous droits réservés"
+                }
+            };
+
+            function applyLanguage(lang) {
+                const langData = translations[lang] || translations["zh-CN"];
+                document.documentElement.lang = lang;
+                const titleText = langData["meta.title"];
+                if (titleText) document.title = titleText;
+
+                document.querySelectorAll("[data-i18n]").forEach(el => {
+                    const key = el.getAttribute("data-i18n");
+                    const value = langData[key];
+                    if (value !== undefined) el.textContent = value;
+                });
+
+                const languageTabs = document.querySelectorAll(".nav-language-tabs .language-tab");
+                languageTabs.forEach(tab => {
+                    tab.classList.toggle("active", tab.getAttribute("data-lang") === lang);
+                });
+
+                try {
+                    localStorage.setItem("site_language", lang);
+                } catch (e) {}
+            }
+
+            function getInitialLanguage() {
+                try {
+                    const saved = localStorage.getItem("site_language");
+                    if (saved && translations[saved]) return saved;
+                } catch (e) {}
+
+                const browserLang = (navigator.language || "").toLowerCase();
+                if (browserLang.startsWith("zh")) return "zh-CN";
+                if (browserLang.startsWith("es")) return "es";
+                if (browserLang.startsWith("fr")) return "fr";
+                return "en";
+            }
+
+            const languageTabs = document.querySelectorAll(".nav-language-tabs .language-tab");
+            languageTabs.forEach(tab => {
+                tab.addEventListener("click", function() {
+                    const lang = this.getAttribute("data-lang");
+                    if (!lang) return;
+                    applyLanguage(lang);
+                });
+            });
+
+            applyLanguage(getInitialLanguage());
+            
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // 移动端点击后关闭菜单
+                        if(window.innerWidth <= 768) {
+                            navLinks.classList.remove('active');
+                        }
+                    }
+                });
+            });
+            
+            // 导航栏滚动高亮
+            const sections = document.querySelectorAll('section[id]');
+            const navLinksAll = document.querySelectorAll('.nav-links a');
+            
+            function highlightNavLink() {
+                let scrollY = window.pageYOffset;
+                
+                sections.forEach(section => {
+                    const sectionHeight = section.offsetHeight;
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                        navLinksAll.forEach(link => {
+                            link.classList.remove('active');
+                            if(link.getAttribute('href') === `#${sectionId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }
+            
+            // 监听滚动事件
+            window.addEventListener('scroll', highlightNavLink);
+            
+            // 页面加载时也执行一次
+            highlightNavLink();
+        });
+    </script>
+</body>
+</html>
